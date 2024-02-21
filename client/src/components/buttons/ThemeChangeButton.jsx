@@ -25,7 +25,7 @@ const ThemeChangeButton = () => {
 
   return (
     <button
-      className="btn btn-square btn-ghost"
+      className="btn btn-square btn-ghost theme-switcher-button"
       onClick={handleThemeChange}>
       {isDarkTheme && <Sun className="fill-current" />}
       {!isDarkTheme && <Moon className="fill-current" />}
