@@ -1,9 +1,9 @@
-import ThemeChangeButton from './ThemeChangeButton';
+import ThemeChangeButton from './buttons/ThemeChangeButton';
 
 const Navbar = () => {
   return (
-    <header>
-      <nav className="navbar bg-base-100">
+    <header className="mb-10 bg-base-100">
+      <nav className="mx-auto max-w-7xl navbar">
         <div className="flex-1">
           <button className="text-xl btn btn-ghost">Taskowdoro</button>
         </div>
