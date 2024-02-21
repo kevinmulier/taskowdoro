@@ -1,28 +1,6 @@
-import { Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import ThemeChangeButton from './ThemeChangeButton';
 
 const Navbar = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
-
-  useEffect(() => {
-    const darkTheme = JSON.parse(localStorage.getItem('darkTheme'));
-    setIsDarkTheme(darkTheme !== null ? darkTheme : true);
-    document.documentElement.setAttribute(
-      'data-theme',
-      darkTheme ? 'sunset' : 'nord',
-    );
-  }, []);
-
-  const handleThemeChange = () => {
-    const newTheme = !isDarkTheme;
-    setIsDarkTheme(newTheme);
-    localStorage.setItem('darkTheme', JSON.stringify(newTheme));
-    document.documentElement.setAttribute(
-      'data-theme',
-      newTheme ? 'sunset' : 'nord',
-    );
-  };
-
   return (
     <header>
       <nav className="navbar bg-base-100">
@@ -30,12 +8,7 @@ const Navbar = () => {
           <button className="text-xl btn btn-ghost">Taskowdoro</button>
         </div>
         <div className="flex-none">
-          <button
-            className="btn btn-square btn-ghost"
-            onClick={handleThemeChange}>
-            {isDarkTheme && <Sun className="fill-current" />}
-            {!isDarkTheme && <Moon className="fill-current" />}
-          </button>
+          <ThemeChangeButton />
           <button className="btn btn-square btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
