@@ -15,8 +15,11 @@ const Flowmodoro = () => {
   useEffect(() => {
     const updateTime = (increment) => {
       setTime((prevTime) => {
-        const newTime = increment ? prevTime + 0.01 : prevTime - 0.01;
-        setFormattedTime(formatTime(Math.ceil(newTime) * 1000));
+        const newTime = increment
+          ? prevTime + 0.01
+          : Math.max(prevTime - 0.01, 0);
+        const timeInMilliseconds = newTime > 0 ? Math.ceil(newTime) * 1000 : 0;
+        setFormattedTime(formatTime(timeInMilliseconds));
         return newTime;
       });
     };
@@ -26,6 +29,7 @@ const Flowmodoro = () => {
       setProgressStyle((currentStyle) => {
         return { ...currentStyle, '--value': '100' };
       });
+      setFormattedTime('00:00');
     };
 
     if (!['focus', 'rest'].includes(mode)) return;
@@ -34,12 +38,12 @@ const Flowmodoro = () => {
       updateTime(mode === 'focus');
 
       if (mode === 'rest') {
-        const progress = (((time - 1) / savedTime) * 100).toString();
+        const progress = (((time - 0.01) / savedTime) * 100).toString();
         setProgressStyle((currentStyle) => {
           return { ...currentStyle, '--value': progress };
         });
 
-        if (time <= 1) {
+        if (time <= 0.01) {
           clearInterval(intervalId);
           transitionToEndOfRest();
         }
