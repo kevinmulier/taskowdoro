@@ -5,8 +5,9 @@ const ThemeChangeButton = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   useEffect(() => {
-    const darkTheme = JSON.parse(localStorage.getItem('darkTheme'));
-    setIsDarkTheme(darkTheme !== null ? darkTheme : true);
+    const darkTheme = JSON.parse(localStorage.getItem('darkTheme')) ?? true;
+    setIsDarkTheme(darkTheme);
+
     document.documentElement.setAttribute(
       'data-theme',
       darkTheme ? 'sunset' : 'nord',
