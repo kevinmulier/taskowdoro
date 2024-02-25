@@ -5,6 +5,7 @@ const FlowmodoroButtons = () => {
   const mode = useFlowStore((state) => state.mode);
 
   const toggleMode = useFlowStore((state) => state.toggleMode);
+  const toggleSettings = useFlowStore((state) => state.toggleSettings);
 
   return (
     <div className="flex gap-2">
@@ -14,7 +15,9 @@ const FlowmodoroButtons = () => {
         {mode && <Square />}
         {!mode && <Play />}
       </button>
-      <button className="btn btn-circle btn-outline">
+      <button
+        className="btn btn-circle btn-outline"
+        onClick={toggleSettings}>
         <Settings />
       </button>
     </div>

@@ -12,6 +12,7 @@ const useFlowStore = create((set) => ({
     '--size': '12rem',
     '--thickness': '1rem',
   },
+  settingsOpen: false,
   focusBreakRatio: 5,
 
   // Action
@@ -38,6 +39,25 @@ const useFlowStore = create((set) => ({
       // else, reset time/UI and toggle mode accordingly
       state.resetTimeAndUI();
       return state.mode === 'rest' ? { mode: null } : { mode: 'focus' };
+    });
+  },
+
+  toggleSettings: () => {
+    set((state) => ({
+      settingsOpen: !state.settingsOpen,
+    }));
+  },
+
+  setFocusBreakRatio: (ratio) => {
+    set(() => {
+      if (Number.isNaN(ratio)) {
+        return {
+          focusBreakRatio: 5,
+        };
+      }
+      return {
+        focusBreakRatio: ratio,
+      };
     });
   },
 

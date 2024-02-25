@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import useFlowStore from '../stores/useFlowStore';
 import FlowmodoroButtons from './buttons/FlowmodoroButtons';
 import FlowmodoroTimer from './timer/FlowmodoroTimer';
+import FlowmodoroSettings from './FlowmodoroSettings';
 
 const Flowmodoro = () => {
   const mode = useFlowStore((state) => state.mode);
   const time = useFlowStore((state) => state.time);
   const savedTime = useFlowStore((state) => state.savedTime);
+  const settingsOpen = useFlowStore((state) => state.settingsOpen);
 
   const updateTime = useFlowStore((state) => state.updateTime);
   const updateProgress = useFlowStore((state) => state.updateProgress);
@@ -36,6 +38,7 @@ const Flowmodoro = () => {
       <h1 className="text-xl font-bold">Flow</h1>
       <FlowmodoroTimer />
       <FlowmodoroButtons />
+      {settingsOpen && <FlowmodoroSettings />}
     </section>
   );
 };
