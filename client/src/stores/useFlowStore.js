@@ -49,16 +49,9 @@ const useFlowStore = create((set) => ({
   },
 
   setFocusBreakRatio: (ratio) => {
-    set(() => {
-      if (Number.isNaN(ratio)) {
-        return {
-          focusBreakRatio: 5,
-        };
-      }
-      return {
-        focusBreakRatio: ratio,
-      };
-    });
+    set(() => ({
+      focusBreakRatio: ratio,
+    }));
   },
 
   resetTimeAndUI: (resetMode = false) => {

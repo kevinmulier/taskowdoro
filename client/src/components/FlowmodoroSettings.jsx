@@ -17,8 +17,9 @@ const FlowmodoroSettings = () => {
           className="w-full max-w-xs input input-bordered"
           value={focusBreakRatio}
           onChange={(e) => setFocusBreakRatio(e.target.value)}
-          min={0}
+          min={0.05}
           max={100}
+          step={0.05}
         />
       </div>
     </div>
