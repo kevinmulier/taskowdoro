@@ -5,6 +5,8 @@ const useFlowStore = create((set) => ({
   // State
   time: 0,
   savedTime: 0,
+  startTime: null,
+  endTime: null,
   formattedTime: '00:00',
   mode: null,
   progressStyle: {
@@ -60,6 +62,8 @@ const useFlowStore = create((set) => ({
         return {
           mode: null,
           time: 0,
+          startTime: null,
+          endTime: null,
           formattedTime: '00:00',
           progressStyle: {
             ...state.progressStyle,
@@ -70,6 +74,8 @@ const useFlowStore = create((set) => ({
 
       return {
         time: 0,
+        startTime: null,
+        endTime: null,
         formattedTime: '00:00',
         progressStyle: {
           ...state.progressStyle,
@@ -81,16 +87,31 @@ const useFlowStore = create((set) => ({
 
   updateTime: (increment) => {
     set((state) => {
-      const newTime = increment
-        ? state.time + 0.01
-        : Math.max(state.time - 0.01, 0);
-      const timeInMilliseconds =
-        newTime > 0
-          ? increment
-            ? Math.floor(newTime) * 1000
-            : Math.ceil(newTime) * 1000
-          : 0;
-      return { time: newTime, formattedTime: formatTime(timeInMilliseconds) };
+      if (!state.endTime && state.mode === 'rest') {
+        return {
+          endTime: Date.now() + state.time * 1000,
+          startTime: null,
+        };
+      }
+      if (!state.startTime) {
+        return {
+          startTime: Date.now(),
+        };
+      }
+      return {
+        startTime: state.startTime,
+      };
+    });
+
+    set((state) => {
+      const now = Date.now();
+
+      const newTime = increment ? now - state.startTime : state.endTime - now;
+      const timeInMilliseconds = newTime > 0 ? Math.floor(newTime) : 0;
+      return {
+        time: newTime / 1000,
+        formattedTime: formatTime(timeInMilliseconds),
+      };
     });
   },
 

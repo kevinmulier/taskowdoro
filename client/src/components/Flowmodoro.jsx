@@ -7,6 +7,7 @@ import FlowmodoroSettings from './FlowmodoroSettings';
 const Flowmodoro = () => {
   const mode = useFlowStore((state) => state.mode);
   const time = useFlowStore((state) => state.time);
+  const startTime = useFlowStore((state) => state.startTime);
   const savedTime = useFlowStore((state) => state.savedTime);
   const settingsOpen = useFlowStore((state) => state.settingsOpen);
 
@@ -31,7 +32,15 @@ const Flowmodoro = () => {
     }, 10);
 
     return () => clearInterval(intervalId);
-  }, [mode, time, savedTime, resetTimeAndUI, updateTime, updateProgress]);
+  }, [
+    mode,
+    time,
+    startTime,
+    savedTime,
+    resetTimeAndUI,
+    updateTime,
+    updateProgress,
+  ]);
 
   return (
     <section className="flex flex-col items-center justify-center w-full max-w-xl gap-5 p-5 mx-auto rounded-lg bg-base-300">
