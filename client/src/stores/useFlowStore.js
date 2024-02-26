@@ -9,6 +9,7 @@ const useFlowStore = create((set) => ({
   endTime: null,
   formattedTime: '00:00',
   mode: null,
+  pause: false,
   progressStyle: {
     '--value': '100',
     '--size': '12rem',
@@ -16,6 +17,7 @@ const useFlowStore = create((set) => ({
   },
   settingsOpen: false,
   focusBreakRatio: 5,
+  automaticRest: true,
 
   // Action
   toggleMode: () => {
@@ -23,22 +25,26 @@ const useFlowStore = create((set) => ({
       if (state.mode === 'focus') {
         const newRestTime = Math.floor(state.time / state.focusBreakRatio);
 
-        // if mode === focus and new ratio time > 0, rest mode
+        if (!state.automaticRest && !state.pause) {
+          return {
+            pause: true,
+          };
+        }
+
         if (newRestTime > 0) {
           return {
             time: newRestTime,
             savedTime: newRestTime,
             formattedTime: formatTime(newRestTime * 1000),
             mode: 'rest',
+            pause: false,
           };
         }
 
-        // if mode === focus and new ratio time === 0, reset everything
         state.resetTimeAndUI();
         return { mode: null };
       }
 
-      // else, reset time/UI and toggle mode accordingly
       state.resetTimeAndUI();
       return state.mode === 'rest' ? { mode: null } : { mode: 'focus' };
     });
@@ -53,6 +59,12 @@ const useFlowStore = create((set) => ({
   setFocusBreakRatio: (ratio) => {
     set(() => ({
       focusBreakRatio: ratio || 1,
+    }));
+  },
+
+  setAutomaticRest: () => {
+    set((state) => ({
+      automaticRest: !state.automaticRest,
     }));
   },
 
@@ -73,6 +85,7 @@ const useFlowStore = create((set) => ({
       }
 
       return {
+        pause: false,
         time: 0,
         startTime: null,
         endTime: null,

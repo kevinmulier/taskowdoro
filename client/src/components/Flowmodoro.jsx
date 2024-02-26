@@ -6,6 +6,7 @@ import FlowmodoroSettings from './FlowmodoroSettings';
 
 const Flowmodoro = () => {
   const mode = useFlowStore((state) => state.mode);
+  const pause = useFlowStore((state) => state.pause);
   const time = useFlowStore((state) => state.time);
   const startTime = useFlowStore((state) => state.startTime);
   const savedTime = useFlowStore((state) => state.savedTime);
@@ -17,6 +18,7 @@ const Flowmodoro = () => {
 
   useEffect(() => {
     if (!['focus', 'rest'].includes(mode)) return;
+    if (pause) return;
 
     const intervalId = setInterval(() => {
       updateTime(mode === 'focus');
@@ -34,6 +36,7 @@ const Flowmodoro = () => {
     return () => clearInterval(intervalId);
   }, [
     mode,
+    pause,
     time,
     startTime,
     savedTime,
@@ -44,7 +47,7 @@ const Flowmodoro = () => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full max-w-xl gap-5 p-5 mx-auto rounded-lg bg-base-300">
-      <h1 className="text-xl font-bold">Flow</h1>
+      <h1 className="text-3xl font-bold">Flow</h1>
       <FlowmodoroTimer />
       <FlowmodoroButtons />
       {settingsOpen && <FlowmodoroSettings />}

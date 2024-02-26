@@ -3,6 +3,7 @@ import useFlowStore from '../../stores/useFlowStore';
 
 const FlowmodoroButtons = () => {
   const mode = useFlowStore((state) => state.mode);
+  const pause = useFlowStore((state) => state.pause);
 
   const toggleMode = useFlowStore((state) => state.toggleMode);
   const toggleSettings = useFlowStore((state) => state.toggleSettings);
@@ -12,8 +13,8 @@ const FlowmodoroButtons = () => {
       <button
         className="btn btn-circle btn-outline"
         onClick={toggleMode}>
-        {mode && <Square />}
-        {!mode && <Play />}
+        {mode && !pause && <Square />}
+        {(!mode || pause) && <Play />}
       </button>
       <button
         className="btn btn-circle btn-outline"
