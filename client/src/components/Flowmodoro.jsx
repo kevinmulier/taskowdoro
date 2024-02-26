@@ -46,7 +46,7 @@ const Flowmodoro = () => {
   ]);
 
   return (
-    <section className="flex flex-col items-center justify-center w-full max-w-xl gap-5 p-5 mx-auto rounded-lg bg-base-300">
+    <section className="flex flex-col items-center justify-center w-full max-w-md gap-5 p-8 mx-auto rounded-lg bg-base-300">
       <h1 className="text-3xl font-bold">Flow</h1>
       <FlowmodoroTimer />
       <FlowmodoroButtons />
