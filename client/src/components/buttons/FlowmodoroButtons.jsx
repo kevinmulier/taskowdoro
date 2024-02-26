@@ -12,13 +12,15 @@ const FlowmodoroButtons = () => {
     <div className="flex gap-2">
       <button
         className="btn btn-circle btn-outline"
-        onClick={toggleMode}>
+        onClick={toggleMode}
+        aria-label="Start or stop the Flowmodoro Timer">
         {mode && !pause && <Square />}
         {(!mode || pause) && <Play />}
       </button>
       <button
-        className="btn btn-circle btn-outline"
-        onClick={toggleSettings}>
+        className="btn btn-circle btn-outline open-settings-flowmodoro"
+        onClick={toggleSettings}
+        aria-label="Open or Close settings">
         <Settings />
       </button>
     </div>
