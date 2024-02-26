@@ -11,11 +11,11 @@ const FlowmodoroSettings = () => {
     <div className="flex flex-col items-center justify-center w-full gap-1">
       <h1 className="mb-1 text-lg font-bold text-center">SETTINGS</h1>
       <div className="form-control">
-        <label className="flex items-center gap-3 label">
+        <label className="flex items-center gap-8 label">
           Focus/Break ratio
           <input
             type="number"
-            className="input input-bordered"
+            className="w-16 input input-bordered"
             value={focusBreakRatio}
             onChange={(e) => setFocusBreakRatio(e.target.value)}
             min={1}
@@ -23,7 +23,7 @@ const FlowmodoroSettings = () => {
             step={0.5}
           />
         </label>
-        <label className="flex items-center gap-3 label">
+        <label className="flex items-center gap-8 label">
           Automatic rest
           <input
             type="checkbox"
