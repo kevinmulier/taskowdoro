@@ -6,21 +6,21 @@ const FlowmodoroSettings = () => {
   const setFocusBreakRatio = useFlowStore((state) => state.setFocusBreakRatio);
 
   return (
-    <div className="flex flex-col w-full gap-1">
+    <div className="flex flex-col items-center justify-center w-full gap-1">
       <h1 className="mb-1 text-lg font-bold text-center">SETTINGS</h1>
       <div className="form-control">
         <label className="flex items-center gap-3 label">
           Focus/Break ratio
+          <input
+            type="number"
+            className="input input-bordered"
+            value={focusBreakRatio}
+            onChange={(e) => setFocusBreakRatio(e.target.value)}
+            min={1}
+            max={100}
+            step={0.5}
+          />
         </label>
-        <input
-          type="number"
-          className="w-full max-w-xs input input-bordered"
-          value={focusBreakRatio}
-          onChange={(e) => setFocusBreakRatio(e.target.value)}
-          min={0.05}
-          max={100}
-          step={0.05}
-        />
       </div>
     </div>
   );

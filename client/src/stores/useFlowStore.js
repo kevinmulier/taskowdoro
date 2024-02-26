@@ -52,7 +52,7 @@ const useFlowStore = create((set) => ({
 
   setFocusBreakRatio: (ratio) => {
     set(() => ({
-      focusBreakRatio: ratio,
+      focusBreakRatio: ratio || 1,
     }));
   },
 
