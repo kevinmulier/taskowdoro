@@ -129,13 +129,24 @@ const useFlowStore = create((set) => ({
     });
   },
 
-  updateProgress: (time, savedTime) => {
-    set((state) => ({
-      progressStyle: {
-        ...state.progressStyle,
-        '--value': (((time - 0.01) / savedTime) * 100).toString(),
-      },
-    }));
+  updateProgress: () => {
+    set((state) => {
+      if (state.time <= 0.01) {
+        state.resetTimeAndUI(true);
+        return {
+          progressStyle: {
+            ...state.progressStyle,
+            '--value': '100',
+          },
+        };
+      }
+      return {
+        progressStyle: {
+          ...state.progressStyle,
+          '--value': (((state.time - 0.01) / state.savedTime) * 100).toString(),
+        },
+      };
+    });
   },
 }));
 
