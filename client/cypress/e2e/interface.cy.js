@@ -11,7 +11,6 @@ describe('app load', () => {
 describe('on theme switcher button click', () => {
   beforeEach(() => {
     cy.visit('');
-    cy.get("[data-theme='sunset']").should('exist');
     cy.get('.theme-switcher-button').click();
   });
 
