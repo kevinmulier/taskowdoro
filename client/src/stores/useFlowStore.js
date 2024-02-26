@@ -27,6 +27,7 @@ const useFlowStore = create((set) => ({
 
         if (!state.automaticRest && !state.pause) {
           return {
+            formattedTime: formatTime(newRestTime * 1000),
             pause: true,
           };
         }
