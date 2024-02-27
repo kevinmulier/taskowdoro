@@ -3,11 +3,13 @@ import useFlowStore from '../../stores/useFlowStore';
 import FlowmodoroButtons from './FlowmodoroButtons';
 import FlowmodoroTimer from './FlowmodoroTimer';
 import FlowmodoroSettings from './FlowmodoroSettings';
+import useTaskStore from '../../stores/useTaskStore';
 
 const Flowmodoro = () => {
   const mode = useFlowStore((state) => state.mode);
   const pause = useFlowStore((state) => state.pause);
   const settingsOpen = useFlowStore((state) => state.settingsOpen);
+  const currentTask = useTaskStore((state) => state.currentTask);
 
   const updateTime = useFlowStore((state) => state.updateTime);
   const updateProgress = useFlowStore((state) => state.updateProgress);
@@ -31,6 +33,7 @@ const Flowmodoro = () => {
   return (
     <section className="flex flex-col items-center justify-center w-full gap-5 p-8 mx-auto rounded-lg bg-base-300">
       <h1 className="text-3xl font-bold">Flow</h1>
+      {currentTask && <h2>{currentTask.task}</h2>}
       <FlowmodoroTimer />
       <FlowmodoroButtons />
       {settingsOpen && <FlowmodoroSettings />}
