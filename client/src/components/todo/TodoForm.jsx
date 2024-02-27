@@ -20,12 +20,13 @@ const TodoForm = () => {
     <form
       onSubmit={handleAddTask}
       className="flex flex-col items-center justify-center gap-3">
+      <h3 className="text-xl font-bold">Add a new task</h3>
       <label className="w-full max-w-xs form-control">
         <div className="label">
           <span
             className="label-text"
             htmlFor="todo">
-            New task title
+            Task title
           </span>
         </div>
         <input
