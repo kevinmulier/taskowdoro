@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import useTaskStore from '../../stores/useTaskStore';
 import useFlowStore from '../../stores/useFlowStore';
 import { Check, CheckCheck, Play, Square, Trash2 } from 'lucide-react';
+import { useEffect } from 'react';
 
 const TodoTask = ({ task }) => {
   const currentTask = useTaskStore((state) => state.currentTask);
@@ -15,9 +16,11 @@ const TodoTask = ({ task }) => {
   const toggleMode = useFlowStore((state) => state.toggleMode);
   const resetTimeAndUI = useFlowStore((state) => state.resetTimeAndUI);
 
-  const taskStyle = task.completed
-    ? 'text-start line-through decoration-2 decoration-double'
-    : 'text-start';
+  useEffect(() => {
+    if (!mode) {
+      setCurrentTask();
+    }
+  }, [mode, setCurrentTask]);
 
   const launchTask = () => {
     if (!currentTask || currentTask.id !== task.id) {
@@ -26,6 +29,10 @@ const TodoTask = ({ task }) => {
     }
     toggleMode();
   };
+
+  const taskStyle = task.completed
+    ? 'text-start line-through decoration-2 decoration-double'
+    : 'text-start';
 
   return (
     <tr className="text-center hover">
