@@ -15,7 +15,7 @@ const FlowmodoroSettings = () => {
           Focus/Break ratio
           <input
             type="number"
-            className="w-16 input input-bordered"
+            className="w-16 input input-bordered input-focus-break-ratio"
             value={focusBreakRatio}
             onChange={(e) => setFocusBreakRatio(e.target.value)}
             min={1}
@@ -27,7 +27,7 @@ const FlowmodoroSettings = () => {
           Automatic rest
           <input
             type="checkbox"
-            className="toggle"
+            className="toggle toggle-automatic-rest"
             checked={automaticRest}
             onChange={setAutomaticRest}
           />

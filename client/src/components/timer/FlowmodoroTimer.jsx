@@ -11,7 +11,7 @@ const FlowmodoroTimer = () => {
 
   return (
     <button
-      className="btn btn-circle btn-ghost w-fit h-fit no-animation"
+      className="btn btn-circle btn-ghost w-fit h-fit no-animation flowmodoro-button"
       onClick={toggleMode}>
       <div
         className="mx-auto radial-progress"
