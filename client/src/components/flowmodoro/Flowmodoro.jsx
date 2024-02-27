@@ -33,7 +33,9 @@ const Flowmodoro = () => {
   return (
     <section className="flex flex-col items-center justify-center w-full gap-5 p-8 mx-auto rounded-lg bg-base-300">
       <h1 className="text-3xl font-bold">Flow</h1>
-      {currentTask && <h2>{currentTask.task}</h2>}
+      {currentTask && (
+        <h2 className="text-xl font-semibold">{currentTask.task}</h2>
+      )}
       <FlowmodoroTimer />
       <FlowmodoroButtons />
       {settingsOpen && <FlowmodoroSettings />}
