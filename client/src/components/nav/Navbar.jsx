@@ -1,4 +1,4 @@
-import ThemeChangeButton from './buttons/ThemeChangeButton';
+import ThemeChangeButton from '../buttons/ThemeChangeButton';
 
 const Navbar = () => {
   return (

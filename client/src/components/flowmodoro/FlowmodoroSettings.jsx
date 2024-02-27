@@ -1,4 +1,4 @@
-import useFlowStore from '../stores/useFlowStore';
+import useFlowStore from '../../stores/useFlowStore';
 
 const FlowmodoroSettings = () => {
   const focusBreakRatio = useFlowStore((state) => state.focusBreakRatio);

@@ -1,12 +1,14 @@
-import Flowmodoro from './components/Flowmodoro';
-import Navbar from './components/Navbar';
+import Flowmodoro from './components/flowmodoro/Flowmodoro';
+import Navbar from './components/nav/Navbar';
+import Todo from './components/Todo';
 
 function App() {
   return (
     <>
       <Navbar />
-      <div className="container p-2 mx-auto">
+      <div className="container flex flex-col max-w-xl gap-4 p-2 mx-auto">
         <Flowmodoro />
+        <Todo />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import useFlowStore from '../stores/useFlowStore';
-import FlowmodoroButtons from './buttons/FlowmodoroButtons';
-import FlowmodoroTimer from './timer/FlowmodoroTimer';
+import useFlowStore from '../../stores/useFlowStore';
+import FlowmodoroButtons from './FlowmodoroButtons';
+import FlowmodoroTimer from './FlowmodoroTimer';
 import FlowmodoroSettings from './FlowmodoroSettings';
 
 const Flowmodoro = () => {

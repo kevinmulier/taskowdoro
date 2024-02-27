@@ -23,7 +23,9 @@ const useFlowStore = create((set) => ({
   toggleMode: () => {
     set((state) => {
       if (state.mode === 'focus') {
-        const newRestTime = Math.floor(state.time / state.focusBreakRatio);
+        const focusBreakRatio =
+          state.focusBreakRatio != 0 ? state.focusBreakRatio : 1;
+        const newRestTime = Math.floor(state.time / focusBreakRatio);
 
         if (!state.automaticRest && !state.pause) {
           return {
@@ -59,7 +61,7 @@ const useFlowStore = create((set) => ({
 
   setFocusBreakRatio: (ratio) => {
     set(() => ({
-      focusBreakRatio: ratio || 1,
+      focusBreakRatio: ratio,
     }));
   },
 
