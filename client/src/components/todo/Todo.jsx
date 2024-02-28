@@ -4,6 +4,7 @@ import TodoTasksList from './TodoTasksList';
 
 const Todo = () => {
   const tasks = useTaskStore((state) => state.tasks);
+  const lists = useTaskStore((state) => state.tasksLists);
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5 px-2 py-8 mx-auto rounded-lg sm:px-8 bg-base-300">
