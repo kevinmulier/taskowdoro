@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container flex flex-col max-w-xl gap-4 p-2 mx-auto">
+      <div className="container flex justify-center gap-4 p-2 mx-auto max-md:flex-col">
         <Flowmodoro />
         <Todo />
       </div>
