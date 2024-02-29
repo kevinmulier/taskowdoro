@@ -1,18 +1,31 @@
 import { Play } from 'lucide-react';
 import useFlowStore from '../../stores/useFlowStore';
+import useTaskStore from '../../stores/useTaskStore';
 
 const FlowmodoroTimer = () => {
   const mode = useFlowStore((state) => state.mode);
   const pause = useFlowStore((state) => state.pause);
   const progressStyle = useFlowStore((state) => state.progressStyle);
+  const time = useFlowStore((state) => state.time);
   const formattedTime = useFlowStore((state) => state.formattedTime);
+  const currentTask = useTaskStore((state) => state.currentTask);
 
   const toggleMode = useFlowStore((state) => state.toggleMode);
+  const updateTaskFocusTime = useTaskStore(
+    (state) => state.updateTaskFocusTime,
+  );
+
+  const handleToggleMode = () => {
+    if (currentTask && mode === 'focus') {
+      updateTaskFocusTime(time);
+    }
+    toggleMode();
+  };
 
   return (
     <button
       className="btn btn-circle btn-ghost w-fit h-fit no-animation flowmodoro-button"
-      onClick={toggleMode}>
+      onClick={handleToggleMode}>
       <div
         className="mx-auto radial-progress"
         style={progressStyle}

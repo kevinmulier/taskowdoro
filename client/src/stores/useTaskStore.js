@@ -71,16 +71,30 @@ const useTaskStore = create((set) => ({
       const updatedSelectedTasks = state.selectedTasks.filter(
         (task) => task.id !== id,
       );
+      const updatedTasksLists = state.tasksLists
+        .map((tasksList) =>
+          !tasksList.tasks.includes(id)
+            ? tasksList
+            : {
+                ...tasksList,
+                tasks: tasksList.tasks.filter((task) => task !== id),
+              },
+        )
+        .filter((tasksList) => tasksList.tasks.length > 0);
+
+      console.log(updatedTasksLists);
       return {
         ...state,
         tasks: updatedTasks,
         selectedTasks: updatedSelectedTasks,
         selectedList:
           updatedSelectedTasks.length > 0 ? state.selectedList : 'all',
-        tasksLists:
-          updatedSelectedTasks.length > 0
-            ? state.tasksLists
-            : state.tasksLists.filter((list) => !list.tasks.includes(id)),
+        tasksLists: updatedTasksLists,
+        currentTask: state.currentTask
+          ? state.currentTask.id !== id
+            ? state.currentTask
+            : null
+          : null,
       };
     });
   },
@@ -101,6 +115,18 @@ const useTaskStore = create((set) => ({
         tasks: updatedTasks,
         selectedTasks:
           state.selectedList === 'all' ? updatedTasks : updatedSelectedTasks,
+      };
+    });
+  },
+
+  updateTaskFocusTime: (time) => {
+    set((state) => {
+      return {
+        tasks: state.tasks.map((task) =>
+          task.id !== state.currentTask.id
+            ? task
+            : { ...task, focusTime: Math.floor(task.focusTime + time) },
+        ),
       };
     });
   },

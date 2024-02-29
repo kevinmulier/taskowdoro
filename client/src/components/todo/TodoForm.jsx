@@ -23,6 +23,7 @@ const TodoForm = () => {
         completed: false,
         list: listId,
         id: taskId,
+        focusTime: 0,
       };
 
       clearFormFields(event);

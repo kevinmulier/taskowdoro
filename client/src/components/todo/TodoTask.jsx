@@ -3,15 +3,20 @@ import useTaskStore from '../../stores/useTaskStore';
 import useFlowStore from '../../stores/useFlowStore';
 import { Check, CheckCheck, Play, Square, Trash2 } from 'lucide-react';
 import { useEffect } from 'react';
+import formatTime from '../../utils/formatTime';
 
 const TodoTask = ({ task }) => {
   const currentTask = useTaskStore((state) => state.currentTask);
   const mode = useFlowStore((state) => state.mode);
+  const time = useFlowStore((state) => state.time);
   const pause = useFlowStore((state) => state.pause);
 
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const checkTask = useTaskStore((state) => state.checkTask);
   const setCurrentTask = useTaskStore((state) => state.setCurrentTask);
+  const updateTaskFocusTime = useTaskStore(
+    (state) => state.updateTaskFocusTime,
+  );
 
   const toggleMode = useFlowStore((state) => state.toggleMode);
   const resetTimeAndUI = useFlowStore((state) => state.resetTimeAndUI);
@@ -27,12 +32,15 @@ const TodoTask = ({ task }) => {
       resetTimeAndUI(true);
       setCurrentTask(task.id);
     }
+    if (currentTask && mode === 'focus') {
+      updateTaskFocusTime(time);
+    }
     toggleMode();
   };
 
   const taskStyle = task.completed
-    ? 'text-start line-through decoration-2 decoration-double'
-    : 'text-start';
+    ? 'line-through decoration-2 decoration-double break-all'
+    : 'break-all';
 
   return (
     <tr className="text-center hover">
@@ -51,7 +59,10 @@ const TodoTask = ({ task }) => {
           {!currentTask && <Play size={20} />}
         </button>
       </td>
-      <td className={taskStyle}>{task.content}</td>
+      <td className="text-start">
+        <span className={taskStyle}>{task.content}</span>
+        <span> - {formatTime(task.focusTime * 1000)}</span>
+      </td>
       <td className="flex justify-center">
         <button onClick={() => deleteTask(task.id)}>
           <Trash2 size={20} />
