@@ -2,7 +2,7 @@ import useTaskStore from '../../stores/useTaskStore';
 import TodoTask from './TodoTask';
 
 const TodoTasksList = () => {
-  const tasks = useTaskStore((state) => state.tasks);
+  const selectedTasks = useTaskStore((state) => state.selectedTasks);
 
   return (
     <div className="w-full overflow-x-auto">
@@ -15,7 +15,7 @@ const TodoTasksList = () => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => (
+          {selectedTasks.map((task) => (
             <TodoTask
               key={task.id}
               task={task}

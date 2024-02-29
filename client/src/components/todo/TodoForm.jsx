@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import useTaskStore from '../../stores/useTaskStore';
-import TodoSelectList from './TodoSelectList';
+import TodoAddTaskSelectList from './TodoAddTaskSelectList';
 
 const TodoForm = () => {
-  const [addTaskList, setAddTaskList] = useState('addnewlist');
+  const selectedList = useTaskStore((state) => state.selectedList);
 
   const addTask = useTaskStore((state) => state.addTask);
   const createOrUpdateTasksList = useTaskStore(
     (state) => state.createOrUpdateTasksList,
   );
-  const lists = useTaskStore((state) => state.tasksLists);
+  const setSelectedList = useTaskStore((state) => state.setSelectedList);
 
   const handleAddTask = (event) => {
     event.preventDefault();
@@ -29,6 +28,8 @@ const TodoForm = () => {
       clearFormFields(event);
       addTask(newTaskObject);
     }
+
+    setSelectedList(listId);
   };
 
   const createOrUpdateList = (event, taskId) => {
@@ -43,7 +44,7 @@ const TodoForm = () => {
     } else {
       list = {
         tasks: [taskId],
-        id: addTaskList,
+        id: selectedList,
       };
     }
 
@@ -54,13 +55,15 @@ const TodoForm = () => {
 
   const clearFormFields = (event) => {
     event.target.todo.value = '';
-    event.target.newlist.value = '';
+    if (event.target.newlist) {
+      event.target.newlist.value = '';
+    }
   };
 
   return (
     <form
       onSubmit={handleAddTask}
-      className="flex flex-col items-center justify-center gap-3">
+      className="flex flex-col items-center justify-center w-full max-w-xs gap-3">
       <h3 className="text-xl font-bold">Add a new task</h3>
       <label className="w-full max-w-xs form-control">
         <div className="label">
@@ -79,12 +82,8 @@ const TodoForm = () => {
           required
         />
       </label>
-      <TodoSelectList
-        lists={lists}
-        setAddTaskList={setAddTaskList}
-        addTaskList={addTaskList}
-      />
-      {addTaskList === 'addnewlist' && (
+      <TodoAddTaskSelectList />
+      {selectedList === 'all' && (
         <label className="w-full max-w-xs form-control">
           <div className="label">
             <span

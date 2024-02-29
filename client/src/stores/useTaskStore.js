@@ -3,13 +3,23 @@ import { create } from 'zustand';
 const useTaskStore = create((set) => ({
   // State
   tasks: [],
+  selectedTasks: [],
   tasksLists: [],
+  selectedList: 'all',
   currentTask: null,
+  createTaskOpen: false,
 
   // Action
+  toggleCreateTaskForm: () => {
+    set((state) => ({
+      createTaskOpen: !state.createTaskOpen,
+    }));
+  },
+
   addTask: (task) => {
     set((state) => ({
       tasks: state.tasks.concat(task),
+      createTaskOpen: false,
     }));
   },
 
@@ -42,17 +52,43 @@ const useTaskStore = create((set) => ({
   },
 
   deleteTask: (id) => {
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id),
-    }));
+    set((state) => {
+      const updatedTasks = state.tasks.filter((task) => task.id !== id);
+      const updatedSelectedTasks = state.selectedTasks.filter(
+        (task) => task.id !== id,
+      );
+      return {
+        ...state,
+        tasks: updatedTasks,
+        selectedTasks: updatedSelectedTasks,
+        selectedList:
+          updatedSelectedTasks.length > 0 ? state.selectedList : 'all',
+        tasksLists:
+          updatedSelectedTasks.length > 0
+            ? state.tasksLists
+            : state.tasksLists.filter((list) => !list.tasks.includes(id)),
+      };
+    });
   },
 
   checkTask: (id) => {
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+    set((state) => {
+      const updatedTasks = state.tasks.map((task) =>
         task.id !== id ? task : { ...task, completed: !task.completed },
-      ),
-    }));
+      );
+      let updatedSelectedTasks = [...state.selectedTasks];
+      if (state.selectedList !== 'all') {
+        updatedSelectedTasks = updatedSelectedTasks.map((task) =>
+          task.id !== id ? task : { ...task, completed: !task.completed },
+        );
+      }
+      return {
+        ...state,
+        tasks: updatedTasks,
+        selectedTasks:
+          state.selectedList === 'all' ? updatedTasks : updatedSelectedTasks,
+      };
+    });
   },
 
   setCurrentTask: (id = null) => {
@@ -68,6 +104,25 @@ const useTaskStore = create((set) => ({
           task: state.tasks.find((task) => task.id === id).content,
         },
       };
+    });
+  },
+
+  setSelectedList: (listId = 'all') => {
+    set((state) => {
+      if (listId === 'all') {
+        return {
+          selectedList: 'all',
+          selectedTasks: state.tasks,
+        };
+      } else {
+        const newSelectedTasks = state.tasks.filter(
+          (task) => task.list === listId,
+        );
+        return {
+          selectedList: listId,
+          selectedTasks: newSelectedTasks,
+        };
+      }
     });
   },
 }));

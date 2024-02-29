@@ -1,9 +1,8 @@
 import useTaskStore from '../../stores/useTaskStore';
 
-const TodoSelectList = () => {
+const TodoAddTaskSelectList = () => {
   const lists = useTaskStore((state) => state.tasksLists);
   const selectedList = useTaskStore((state) => state.selectedList);
-
   const setSelectedList = useTaskStore((state) => state.setSelectedList);
 
   const handleSelectTask = (event) => {
@@ -16,17 +15,17 @@ const TodoSelectList = () => {
         <span
           className="label-text"
           htmlFor="todo">
-          Select an existing task list
+          Add to tasks list
         </span>
       </div>
       <select
         type="text"
-        id="existingListSelect"
-        name="existingListSelect"
+        id="listSelect"
+        name="listSelect"
         className="w-full select select-bordered"
         value={selectedList}
         onChange={(e) => handleSelectTask(e)}>
-        <option value="all">All tasks</option>
+        <option value="all">Create a new list</option>
         {lists.map((list) => {
           return (
             <option
@@ -41,4 +40,4 @@ const TodoSelectList = () => {
   );
 };
 
-export default TodoSelectList;
+export default TodoAddTaskSelectList;
