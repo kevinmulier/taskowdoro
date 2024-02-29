@@ -10,6 +10,20 @@ const useTaskStore = create((set) => ({
   createTaskOpen: false,
 
   // Action
+  setInitialTasksLists: (tasksLists) => {
+    set(() => ({
+      tasksLists: tasksLists,
+      selectedList: 'all',
+    }));
+  },
+
+  setInitialTasks: (tasks) => {
+    set(() => ({
+      tasks: tasks,
+      selectedTasks: tasks,
+    }));
+  },
+
   toggleCreateTaskForm: () => {
     set((state) => ({
       createTaskOpen: !state.createTaskOpen,
