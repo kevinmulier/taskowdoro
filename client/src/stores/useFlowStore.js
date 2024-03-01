@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import formatTime from '../utils/formatTime';
 
+const endRestSound = new Audio('/sounds/timer_bip.mp3');
+
 const useFlowStore = create((set) => ({
   // State
   time: 0,
@@ -71,7 +73,11 @@ const useFlowStore = create((set) => ({
     }));
   },
 
-  resetTimeAndUI: (resetMode = false) => {
+  resetTimeAndUI: (resetMode = false, endOfRest = false) => {
+    if (endOfRest) {
+      endRestSound.play();
+    }
+
     set((state) => {
       if (resetMode) {
         return {
@@ -124,6 +130,7 @@ const useFlowStore = create((set) => ({
 
       const newTime = increment ? now - state.startTime : state.endTime - now;
       const timeInMilliseconds = newTime > 0 ? Math.floor(newTime) : 0;
+
       return {
         time: newTime / 1000,
         formattedTime: formatTime(timeInMilliseconds),
@@ -134,7 +141,7 @@ const useFlowStore = create((set) => ({
   updateProgress: () => {
     set((state) => {
       if (state.time <= 0.01) {
-        state.resetTimeAndUI(true);
+        state.resetTimeAndUI(true, true);
         return {
           progressStyle: {
             ...state.progressStyle,
