@@ -82,7 +82,6 @@ const useTaskStore = create((set) => ({
         )
         .filter((tasksList) => tasksList.tasks.length > 0);
 
-      console.log(updatedTasksLists);
       return {
         ...state,
         tasks: updatedTasks,
@@ -127,6 +126,14 @@ const useTaskStore = create((set) => ({
             ? task
             : { ...task, focusTime: Math.floor(task.focusTime + time) },
         ),
+      };
+    });
+  },
+
+  clearTasksFocusTime: () => {
+    set((state) => {
+      return {
+        tasks: state.tasks.map((task) => ({ ...task, focusTime: 0 })),
       };
     });
   },

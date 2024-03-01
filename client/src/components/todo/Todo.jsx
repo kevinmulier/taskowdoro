@@ -18,6 +18,9 @@ const Todo = () => {
     (state) => state.setInitialTasksLists,
   );
   const setInitialTasks = useTaskStore((state) => state.setInitialTasks);
+  const clearTasksFocusTime = useTaskStore(
+    (state) => state.clearTasksFocusTime,
+  );
 
   const firstRender = useRef(true);
 
@@ -41,8 +44,16 @@ const Todo = () => {
       };
 
       saveData();
+
+      const dateRecorded = localStorage.getItem('dateRecorded');
+      const actualDate = new Date();
+
+      if (Number(dateRecorded) !== actualDate.getDate()) {
+        clearTasksFocusTime();
+        localStorage.setItem('dateRecorded', actualDate.getDate());
+      }
     }
-  }, [tasksLists, tasks]);
+  }, [tasksLists, tasks, clearTasksFocusTime]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5 px-2 py-8 rounded-lg sm:px-8 bg-base-300 h-fit">
