@@ -1,4 +1,5 @@
 import Flowmodoro from './components/flowmodoro/Flowmodoro';
+import Footer from './components/nav/Footer';
 import Navbar from './components/nav/Navbar';
 import Todo from './components/todo/Todo';
 
@@ -10,6 +11,7 @@ function App() {
         <Flowmodoro />
         <Todo />
       </div>
+      <Footer />
     </>
   );
 }
