@@ -3,9 +3,11 @@ import useFlowStore from '../../stores/useFlowStore';
 const FlowmodoroSettings = () => {
   const focusBreakRatio = useFlowStore((state) => state.focusBreakRatio);
   const automaticRest = useFlowStore((state) => state.automaticRest);
+  const alarmRest = useFlowStore((state) => state.alarmRest);
 
   const setFocusBreakRatio = useFlowStore((state) => state.setFocusBreakRatio);
   const setAutomaticRest = useFlowStore((state) => state.setAutomaticRest);
+  const setAlarmRest = useFlowStore((state) => state.setAlarmRest);
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-1">
@@ -30,6 +32,15 @@ const FlowmodoroSettings = () => {
             className="toggle toggle-automatic-rest"
             checked={automaticRest}
             onChange={setAutomaticRest}
+          />
+        </label>
+        <label className="flex items-center gap-8 label">
+          End of rest alarm
+          <input
+            type="checkbox"
+            className="toggle toggle-alarm-rest"
+            checked={alarmRest}
+            onChange={setAlarmRest}
           />
         </label>
       </div>

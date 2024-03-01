@@ -20,6 +20,7 @@ const useFlowStore = create((set) => ({
   settingsOpen: false,
   focusBreakRatio: 5,
   automaticRest: true,
+  alarmRest: false,
 
   // Action
   toggleMode: () => {
@@ -73,12 +74,18 @@ const useFlowStore = create((set) => ({
     }));
   },
 
-  resetTimeAndUI: (resetMode = false, endOfRest = false) => {
-    if (endOfRest) {
-      endRestSound.play();
-    }
+  setAlarmRest: () => {
+    set((state) => ({
+      alarmRest: !state.alarmRest,
+    }));
+  },
 
+  resetTimeAndUI: (resetMode = false, endOfRest = false) => {
     set((state) => {
+      if (endOfRest && state.alarmRest) {
+        endRestSound.play();
+      }
+
       if (resetMode) {
         return {
           mode: null,
