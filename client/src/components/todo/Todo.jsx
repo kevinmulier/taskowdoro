@@ -3,9 +3,11 @@ import TodoForm from './TodoForm';
 import TodoTasksList from './TodoTasksList';
 import TodoSelectList from './TodoSelectList';
 import { Plus } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Todo = () => {
+  const [loadingTodo, setLoadingTodo] = useState(true);
+
   const createTaskOpen = useTaskStore((state) => state.createTaskOpen);
   const selectedTasks = useTaskStore((state) => state.selectedTasks);
   const tasks = useTaskStore((state) => state.tasks);
@@ -52,8 +54,18 @@ const Todo = () => {
         clearTasksFocusTime();
         localStorage.setItem('dateRecorded', actualDate.getDate());
       }
+
+      setLoadingTodo(false);
     }
   }, [tasksLists, tasks, clearTasksFocusTime]);
+
+  if (loadingTodo) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full gap-5 px-2 py-8 rounded-lg sm:px-8 bg-base-300 h-fit">
+        <div className="loading loading-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5 px-2 py-8 rounded-lg sm:px-8 bg-base-300 h-fit">
