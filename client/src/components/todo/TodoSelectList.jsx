@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import useTaskStore from '../../stores/useTaskStore';
 
 const TodoSelectList = () => {
+  const tasks = useTaskStore((state) => state.tasks);
   const lists = useTaskStore((state) => state.tasksLists);
   const selectedList = useTaskStore((state) => state.selectedList);
 
@@ -9,6 +11,10 @@ const TodoSelectList = () => {
   const handleSelectTask = (event) => {
     setSelectedList(event.target.value);
   };
+
+  useEffect(() => {
+    setSelectedList(useTaskStore.getState().selectedList);
+  }, [tasks, setSelectedList]);
 
   return (
     <label className="w-full max-w-xs form-control">
