@@ -83,7 +83,6 @@ const useTaskStore = create((set) => ({
         .filter((tasksList) => tasksList.tasks.length > 0);
 
       return {
-        ...state,
         tasks: updatedTasks,
         selectedTasks: updatedSelectedTasks,
         selectedList:
@@ -103,17 +102,8 @@ const useTaskStore = create((set) => ({
       const updatedTasks = state.tasks.map((task) =>
         task.id !== id ? task : { ...task, completed: !task.completed },
       );
-      let updatedSelectedTasks = [...state.selectedTasks];
-      if (state.selectedList !== 'all') {
-        updatedSelectedTasks = updatedSelectedTasks.map((task) =>
-          task.id !== id ? task : { ...task, completed: !task.completed },
-        );
-      }
       return {
-        ...state,
         tasks: updatedTasks,
-        selectedTasks:
-          state.selectedList === 'all' ? updatedTasks : updatedSelectedTasks,
       };
     });
   },
@@ -154,7 +144,7 @@ const useTaskStore = create((set) => ({
     });
   },
 
-  setSelectedList: (listId = 'all') => {
+  setSelectedList: (listId) => {
     set((state) => {
       if (listId === 'all') {
         return {
