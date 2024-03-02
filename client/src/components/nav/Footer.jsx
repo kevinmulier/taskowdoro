@@ -6,15 +6,17 @@ const Footer = () => {
       <nav>
         <div className="grid grid-flow-col gap-4">
           <a href="https://www.linkedin.com/in/kevin-mulier/">
-            <Linkedin />
+            <Linkedin className="hover:text-base-content/80" />
           </a>
           <a href="https://github.com/kevinmulier">
-            <Github />
+            <Github className="hover:text-base-content/80" />
           </a>
         </div>
       </nav>
       <aside>
-        <p className="font-bold">Created by Kevin Mulier</p>
+        <p className="font-semibold">
+          Created by <span className="font-bold">Kevin Mulier</span>
+        </p>
       </aside>
     </footer>
   );

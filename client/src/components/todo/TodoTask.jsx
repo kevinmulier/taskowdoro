@@ -46,17 +46,38 @@ const TodoTask = ({ task }) => {
     <tr className="text-center hover">
       <td className="flex justify-center gap-2">
         <button onClick={() => checkTask(task.id)}>
-          {!task.completed && <Check size={20} />}
-          {task.completed && <CheckCheck size={20} />}
+          {!task.completed && (
+            <Check
+              className="hover:text-base-content/80"
+              size={20}
+            />
+          )}
+          {task.completed && (
+            <CheckCheck
+              className="hover:text-base-content/80"
+              size={20}
+            />
+          )}
         </button>
         <button onClick={launchTask}>
           {currentTask && (currentTask.id !== task.id || !mode || pause) && (
-            <Play size={20} />
+            <Play
+              className="hover:text-base-content/80"
+              size={20}
+            />
           )}
           {currentTask && currentTask.id == task.id && mode && !pause && (
-            <Square size={20} />
+            <Square
+              className="hover:text-base-content/80"
+              size={20}
+            />
           )}
-          {!currentTask && <Play size={20} />}
+          {!currentTask && (
+            <Play
+              className="hover:text-base-content/80"
+              size={20}
+            />
+          )}
         </button>
       </td>
       <td className="text-start">
@@ -65,7 +86,10 @@ const TodoTask = ({ task }) => {
       </td>
       <td className="flex justify-center">
         <button onClick={() => deleteTask(task.id)}>
-          <Trash2 size={20} />
+          <Trash2
+            className="hover:text-base-content/80"
+            size={20}
+          />
         </button>
       </td>
     </tr>
