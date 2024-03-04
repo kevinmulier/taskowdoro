@@ -31,7 +31,7 @@ const FlowmodoroSettings = () => {
             type="checkbox"
             className="toggle toggle-lg toggle-automatic-rest"
             checked={automaticRest}
-            onChange={setAutomaticRest}
+            onChange={() => setAutomaticRest(false)}
           />
         </label>
         <label className="flex items-center gap-8 label">
@@ -40,7 +40,7 @@ const FlowmodoroSettings = () => {
             type="checkbox"
             className="toggle toggle-lg toggle-alarm-rest"
             checked={alarmRest}
-            onChange={setAlarmRest}
+            onChange={() => setAlarmRest(false)}
           />
         </label>
       </div>

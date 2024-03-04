@@ -68,16 +68,28 @@ const useFlowStore = create((set) => ({
     }));
   },
 
-  setAutomaticRest: () => {
-    set((state) => ({
-      automaticRest: !state.automaticRest,
-    }));
+  setAutomaticRest: (forceFalse = true) => {
+    set((state) => {
+      if (forceFalse) {
+        return { automaticRest: false };
+      }
+
+      return {
+        automaticRest: !state.automaticRest,
+      };
+    });
   },
 
-  setAlarmRest: () => {
-    set((state) => ({
-      alarmRest: !state.alarmRest,
-    }));
+  setAlarmRest: (forceTrue = false) => {
+    set((state) => {
+      if (forceTrue) {
+        return { alarmRest: true };
+      }
+
+      return {
+        alarmRest: !state.alarmRest,
+      };
+    });
   },
 
   resetTimeAndUI: (resetMode = false, endOfRest = false) => {
