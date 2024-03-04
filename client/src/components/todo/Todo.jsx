@@ -33,6 +33,9 @@ const Todo = () => {
     if (tasksListsData && tasksData) {
       setInitialTasksLists(JSON.parse(tasksListsData));
       setInitialTasks(JSON.parse(tasksData));
+    } else {
+      setInitialTasksLists([]);
+      setInitialTasks([]);
     }
   }, [setInitialTasks, setInitialTasksLists]);
 
