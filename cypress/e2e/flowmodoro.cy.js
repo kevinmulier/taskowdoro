@@ -1,4 +1,4 @@
-describe('settings panel', () => {
+describe('Settings panel', () => {
   beforeEach(() => {
     cy.visit('');
   });
@@ -17,7 +17,7 @@ describe('settings panel', () => {
   });
 });
 
-describe('Timer Component', () => {
+describe('Flowmodoro', () => {
   beforeEach(() => {
     cy.visit('');
     cy.get('.open-settings-flowmodoro').click();
