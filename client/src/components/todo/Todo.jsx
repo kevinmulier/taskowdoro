@@ -81,6 +81,7 @@ const Todo = () => {
       {!createTaskOpen && (
         <button
           className="btn btn-circle btn-outline"
+          aria-label="Open new task form"
           onClick={toggleCreateTaskForm}>
           <Plus size={32} />
         </button>
