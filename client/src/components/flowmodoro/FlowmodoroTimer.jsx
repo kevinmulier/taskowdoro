@@ -25,11 +25,13 @@ const FlowmodoroTimer = () => {
   return (
     <button
       className="btn btn-circle btn-ghost w-fit h-fit no-animation flowmodoro-button"
+      aria-label="Flowmodoro Start/Stop Button"
       onClick={handleToggleMode}>
       <div
         className="mx-auto radial-progress"
         style={progressStyle}
-        role="progressbar">
+        role="progressbar"
+        aria-label="Timer Progress Bar">
         {!mode && <Play size={50} />}
         {pause && (
           <div className="flex flex-col items-center justify-center gap-1">

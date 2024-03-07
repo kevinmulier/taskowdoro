@@ -68,9 +68,7 @@ const TodoForm = () => {
       <h3 className="text-xl font-bold">Create a new task</h3>
       <label className="w-full max-w-xs form-control">
         <div className="label">
-          <span
-            className="label-text"
-            htmlFor="todo">
+          <span className="label-text" htmlFor="todo">
             Task title
           </span>
         </div>
@@ -87,9 +85,7 @@ const TodoForm = () => {
       {selectedList === 'all' && (
         <label className="w-full max-w-xs form-control">
           <div className="label">
-            <span
-              className="label-text"
-              htmlFor="newlist">
+            <span className="label-text" htmlFor="newlist">
               New list name
             </span>
           </div>
@@ -105,7 +101,8 @@ const TodoForm = () => {
       )}
       <button
         type="submit"
-        className="btn btn-outline">
+        className="btn btn-outline"
+        aria-label="Submit new task">
         Add task
       </button>
     </form>

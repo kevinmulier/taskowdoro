@@ -18,6 +18,7 @@ const FlowmodoroSettings = () => {
           <input
             type="number"
             className="w-16 input-sm input input-bordered input-focus-break-ratio"
+            aria-label="Set Focus Break Ratio"
             value={focusBreakRatio}
             onChange={(e) => setFocusBreakRatio(e.target.value)}
             min={1}
@@ -30,6 +31,7 @@ const FlowmodoroSettings = () => {
           <input
             type="checkbox"
             className="toggle toggle-lg toggle-automatic-rest"
+            aria-label="Automatic Rest Switcher"
             checked={automaticRest}
             onChange={() => setAutomaticRest(false)}
           />
@@ -39,6 +41,7 @@ const FlowmodoroSettings = () => {
           <input
             type="checkbox"
             className="toggle toggle-lg toggle-alarm-rest"
+            aria-label="Alarm Rest Sound Switcher"
             checked={alarmRest}
             onChange={() => setAlarmRest(false)}
           />
